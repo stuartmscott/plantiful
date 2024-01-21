@@ -2,9 +2,9 @@
 
 ## Species, Plants, Produce, Harvest
 
-## Containers, Locations, Soils, Notes
+## Containers, Locations, Soils, Observations
 
-## Watering, Pruning, Fertilizing, Mulching
+## Watering, Fertilizing, Mulching, Pruning
 
 ## Install
 
