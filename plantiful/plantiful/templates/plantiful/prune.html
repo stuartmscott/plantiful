@@ -1,0 +1,21 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Pruning {{ prune.id }}{% endblock %}
+
+{% block content %}
+<h1>Pruning {{ prune.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ prune.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' prune.plant.id %}">{{ prune.plant.name }}</a>
+
+{% if prune.text %}
+<h2>Text</h2>
+
+<p>{{ prune.text }}</p>
+{% endif %}
+{% endblock %}

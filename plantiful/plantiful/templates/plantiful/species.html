@@ -1,0 +1,15 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Species {{ species.id }}{% endblock %}
+
+{% block content %}
+<h1>Species {{ species.id }}</h1>
+
+<h2>Common Name</h2>
+
+<p>{{ species.common_name }}</p>
+
+<h2>Latin Binomial</h2>
+
+<p>{{ species.latin_binomial }}</p>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Produce {{ produce.id }} {{ produce.name }}{% endblock %}
+
+{% block content %}
+<h1>Produce {{ produce.id }}</h1>
+
+<h2>Name</h2>
+
+<p>{{ produce.name }}</p>
+
+<h2>Species</h2>
+
+<a href="{% url 'species' produce.species.id %}">{{ produce.species.common_name }}</a>
+{% endblock %}

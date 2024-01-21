@@ -1,0 +1,17 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}All Plants{% endblock %}
+
+{% block content %}
+<h1>All Plants</h1>
+
+{% if plant_list %}
+<ul>
+{% for plant in plant_list %}
+    <li><a href="{% url 'plant' plant.id %}">{{ plant.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No plants are available.</p>
+{% endif %}
+{% endblock %}

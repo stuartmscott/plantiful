@@ -1,0 +1,24 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Fertilizing {{ fertilize.id }}{% endblock %}
+
+{% block content %}
+<h1>Fertilizing {{ fertilize.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ fertilize.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' fertilize.plant.id %}">{{ fertilize.plant.name }}</a>
+
+<h2>Type</h2>
+
+<p>{{ fertilize.type }}</p>
+
+<h2>Amount</h2>
+
+<p>{{ fertilize.amount }} {{ fertilize.unit_name }}</p>
+
+{% endblock %}

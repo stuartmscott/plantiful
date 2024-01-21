@@ -1,0 +1,17 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}All Containers{% endblock %}
+
+{% block content %}
+<h1>All Containers</h1>
+
+{% if container_list %}
+<ul>
+{% for container in container_list %}
+    <li><a href="{% url 'container' container.id %}">{{ container.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No containers are available.</p>
+{% endif %}
+{% endblock %}

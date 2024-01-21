@@ -1,0 +1,17 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}All Produce{% endblock %}
+
+{% block content %}
+<h1>All Produce</h1>
+
+{% if produce_list %}
+<ul>
+{% for produce in produce_list %}
+    <li><a href="{% url 'produce' produce.id %}">{{ produce.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No produce is available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Mulch {{ mulch.id }}{% endblock %}
+
+{% block content %}
+<h1>Mulching {{ mulch.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ mulch.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' mulch.plant.id %}">{{ mulch.plant.name }}</a>
+
+<h2>Type</h2>
+
+<p>{{ mulch.type }}</p>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Container {{ container.id }} {{ container.name }}{% endblock %}
+
+{% block content %}
+<h1>Container {{ container.id }}</h1>
+
+<h2>Name</h2>
+
+<p>{{ container.name }}</p>
+
+<h2>Size</h2>
+
+<p>{{ container.size }}</p>
+
+<h2>Plants</h2>
+
+<ul>
+{% for plant in container.plant_set.all %}
+    <li><a href="{% url 'plant' plant.id %}">{{ plant.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Transplants</h2>
+
+<ul>
+{% for transplant in container.transplant_set.all %}
+    <li><a href="{% url 'transplant' transplant.id %}">{{ transplant.datetime }} {{ transplant.plant.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Location</h2>
+
+<p>{{ container.location }}</p>
+
+<h2>Relocations</h2>
+
+<ul>
+{% for relocation in container.relocation_set.all %}
+    <li><a href="{% url 'relocation' relocation.id %}">{{ relocation.datetime }} {{ relocation.location }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Soil</h2>
+
+<p>{{ container.soil_type }}</p>
+
+<h2>Resoils</h2>
+
+<ul>
+{% for resoil in container.resoil_set.all %}
+    <li><a href="{% url 'resoil' resoil.id %}">{{ resoil.datetime }} {{ resoil.type }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

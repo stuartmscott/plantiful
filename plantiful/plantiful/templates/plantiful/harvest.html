@@ -1,0 +1,24 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Harvest {{ fertilize.id }}{% endblock %}
+
+{% block content %}
+<h1>Harvest {{ harvest.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ harvest.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' harvest.plant.id %}">{{ harvest.plant.name }}</a>
+
+<h2>Produce</h2>
+
+<a href="{% url 'produce' harvest.produce.id %}">{{ harvest.produce.name }}</a>
+
+<h2>Weight</h2>
+
+<p>{{ harvest.weight }} {{ harvest.unit_name }}</p>
+
+{% endblock %}

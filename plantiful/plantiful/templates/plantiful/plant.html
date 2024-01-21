@@ -1,0 +1,206 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plant {{ plant.id }} {{ plant.name }}{% endblock %}
+
+{% block content %}
+<h1>Plant {{ plant.id }}</h1>
+
+<h2>Name</h2>
+
+<p>{{ plant.name }}</p>
+
+<h2>Timestamp</h2>
+
+<p>{{ plant.datetime }}</p>
+
+<h2>Species</h2>
+
+<a href="{% url 'species' plant.species.id %}">{{ plant.species.common_name }} - {{ plant.species.latin_binomial }}</a>
+
+{% if plant.supplier %}
+<h2>Supplier</h2>
+
+<p>{{ plant.supplier }}</p>
+{% endif %}
+
+{% if plant.source %}
+<h2>Source</h2>
+
+<p>{{ plant.source_name }}</p>
+{% endif %}
+
+{% if plant.parent %}
+<h2>Parent</h2>
+
+<a href="{% url 'plant' plant.parent.id %}">{{ plant.parent.name }}</a>
+{% endif %}
+
+{% if plant.container %}
+<h2>Container</h2>
+
+<a href="{% url 'container' plant.container.id %}">{{ plant.container.name }}</a>
+
+<h3>Location</h3>
+
+<p>{{ plant.container.location }}</p>
+
+<h3>Soil</h3>
+
+<p>{{ plant.container.soil_type }}</p>
+{% endif %}
+
+<h2>Transplants</h2>
+
+<ul>
+{% for transplant in plant.transplant_set.all %}
+    <li><a href="{% url 'transplant' transplant.id %}">{{ transplant.datetime }}</a> <a href="{% url 'container' transplant.container.id %}">{{ transplant.container.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Harvests</h2>
+
+<ul>
+{% for produce in plant.species.produce_set.all %}
+    <li>{{ produce.name }}
+        <ul>
+    {%  for harvest in produce.harvest_set.all %}
+            <li><a href="{% url 'harvest' harvest.id %}">{{ harvest.datetime }}</a> {{ harvest.weight }} {{ harvest.unit_name }}</li>
+    {%  endfor %}
+        </ul>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'new_harvest' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>New Harvest</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <select name="produce_id" id="produce_id">
+    {% for produce in plant.species.produce_set.all %}
+        <option value="{{ produce.id }}" label="{{ produce.name }}">{{ produce.name }}</option>
+    {% endfor %}
+    </select>
+    <label for="produce_id">Produce</label><br>
+    <input type="integer" name="harvest_weight" id="harvest_weight" />
+    <label for="harvest_weight">Weight</label><br>
+    <select name="harvest_unit" id="harvest_unit">
+    {% for unit in units %}
+        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Gram" %}selected{% endif %}>{{ unit.1 }}</option>
+    {% endfor %}
+    </select>
+    <label for="harvest_unit">Unit</label><br>
+</fieldset>
+<input type="submit" value="Harvest">
+</form>
+
+<h2>Observation</h2>
+
+<ul>
+{% for observation in plant.observation_set.all %}
+    <li><a href="{% url 'observation' observation.id %}">{{ observation.datetime }}</a> {{ observation.text }} {{ observation.image }}</li>
+{% endfor %}
+</ul>
+<form action="{% url 'new_observation' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>New Observation</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="text" name="observation_text" id="observation_text" />
+    <label for="observation_text">Text</label><br>
+    <input type="image" name="observation_image" id="observation_image" />
+    <label for="observation_image">Image</label><br>
+</fieldset>
+<input type="submit" value="Record">
+</form>
+
+<h2>Waterings</h2>
+
+<ul>
+{% for water in plant.water_set.all %}
+    <li><a href="{% url 'water' water.id %}">{{ water.datetime }}</a> {{ water.amount }} {{ water.unit_name }}</li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'new_water' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>New Watering</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="integer" name="water_amount" id="water_amount" />
+    <label for="water_amount">Amount</label><br>
+    <select name="water_unit" id="water_unit">
+    {% for unit in units %}
+        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Litre" %}selected{% endif %}>{{ unit.1 }}</option>
+    {% endfor %}
+    </select>
+    <label for="water_unit">Unit</label><br>
+</fieldset>
+<input type="submit" value="Record">
+</form>
+
+<h2>Prunings</h2>
+
+<ul>
+{% for prune in plant.prune_set.all %}
+    <li><a href="{% url 'prune' prune.id %}">{{ prune.datetime }}</a> {% if prune.text %}{{ prune.text }}{% endif %}</li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'new_prune' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>New Pruning</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="text" name="prune_text" id="prune_text" />
+    <label for="prune_text">Text</label><br>
+</fieldset>
+<input type="submit" value="Record">
+</form>
+
+<h2>Fertilizings</h2>
+
+<ul>
+{% for fertilize in plant.fertilize_set.all %}
+    <li><a href="{% url 'fertilize' fertilize.id %}">{{ fertilize.datetime }}</a> {{ fertilize.type }} {{ fertilize.amount }} {{ fertilize.unit_name }}</li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'new_fertilize' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>New Fertilizing</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="type" name="fertilize_type" id="fertilize_type" />
+    <label for="fertilize_type">Type</label><br>
+    <input type="integer" name="fertilize_amount" id="fertilize_amount" />
+    <label for="fertilize_amount">Amount</label><br>
+    <select name="fertilize_unit" id="fertilize_unit">
+    {% for unit in units %}
+        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Kilogram" %}selected{% endif %}>{{ unit.1 }}</option>
+    {% endfor %}
+    </select>
+    <label for="fertilize_unit">Unit</label><br>
+</fieldset>
+<input type="submit" value="Record">
+</form>
+
+<h2>Mulchings</h2>
+
+<ul>
+{% for mulch in plant.mulch_set.all %}
+    <li><a href="{% url 'mulch' mulch.id %}">{{ mulch.datetime }}</a> {{ mulch.type }}</li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'new_mulch' plant.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h3>Mulch</h3></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="type" name="mulch_type" id="mulch_type" />
+    <label for="mulch_type">Type</label><br>
+</fieldset>
+<input type="submit" value="Record">
+</form>
+{% endblock %}

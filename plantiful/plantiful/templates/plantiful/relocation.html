@@ -1,0 +1,19 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Relocation {{ relocation.id }}{% endblock %}
+
+{% block content %}
+<h1>Relocation {{ relocation.id }}</h2>
+
+<h2>Timestamp</h2>
+
+<p>{{ relocation.datetime }}</p>
+
+<h2>Container</h2>
+
+<a href="{% url 'container' relocation.container.id %}">{{ relocation.container.name }}</a>
+
+<h2>Location</h2>
+
+<p>{{ relocation.location }}</p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plantiful{% endblock %}
+
+{% block content %}
+<h1>Plantiful</h1>
+
+<ul>
+    <li><a href="{% url 'all_containers' %}">Containers</a></li>
+    <li><a href="{% url 'all_species' %}">Species</a></li>
+    <li><a href="{% url 'all_plants' %}">Plants</a></li>
+    <li><a href="{% url 'all_produce' %}">Produce</a></li>
+</ul>
+{% endblock %}

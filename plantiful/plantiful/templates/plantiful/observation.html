@@ -1,0 +1,23 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Observation {{ observation.id }}{% endblock %}
+
+{% block content %}
+<h1>Observation {{ observation.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ observation.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' observation.plant.id %}">{{ observation.plant.name }}</a>
+
+<h2>Text</h2>
+
+<p>{{ observation.text }}</p>
+
+<h2>Image</h2>
+
+<p>{{ observation.image }}</p>
+{% endblock %}

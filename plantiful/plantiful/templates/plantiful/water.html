@@ -1,0 +1,20 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Watering {{ water.id }}{% endblock %}
+
+{% block content %}
+<h1>Watering {{ water.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ water.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' water.plant.id %}">{{ water.plant.name }}</a>
+
+<h2>Amount</h2>
+
+<p>{{ water.amount }} {{ water.unit_name }}</p>
+
+{% endblock %}

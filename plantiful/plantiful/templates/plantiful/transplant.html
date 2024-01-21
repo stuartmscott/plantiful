@@ -1,0 +1,19 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Transplant {{ transplant.id }}{% endblock %}
+
+{% block content %}
+<h1>Transplanting {{ transplant.id }}</h1>
+
+<h2>Timestamp</h2>
+
+<p>{{ transplant.datetime }}</p>
+
+<h2>Plant</h2>
+
+<a href="{% url 'plant' transplant.plant.id %}">{{ transplant.plant.name }}</a>
+
+<h2>Container</h2>
+
+<a href="{% url 'container' transplant.container.id %}">{{ transplant.container.name }}</a>
+{% endblock %}

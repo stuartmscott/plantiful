@@ -1,0 +1,19 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Resoil {{ respoil.id }}{% endblock %}
+
+{% block content %}
+<h1>Resoil {{ resoil.id }}</h2>
+
+<h2>Timestamp</h2>
+
+<p>{{ resoil.datetime }}</p>
+
+<h2>Container</h2>
+
+<a href="{% url 'container' resoil.container.id %}">{{ resoil.container.name }}</a>
+
+<h2>Type</h2>
+
+<p>{{ resoil.type }}</p>
+{% endblock %}
