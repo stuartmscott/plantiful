@@ -16,6 +16,7 @@ body {
 }
 ul, ol {
     text-align: "center";
+    list-style-position: inside;
 }
 p {
     color: #F1F2EB;
