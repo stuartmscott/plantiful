@@ -1,12 +1,34 @@
 h1, h2, h3, h4, h5, h6 {
-    color: 255921;
+    color: #255921;
     text-align: center;
 }
 body {
+    background-color: #1E2019;
     margin:0 auto;
     max-width: max-content;
-    background-color: 62A87C;
+    min-width: 500px;
 }
-li a {
-    color: 255921;
+#content {
+    background-color: #62A87C;
+    border-radius: 36px;
+    padding: 36px;
+    text-align: center;
+}
+ul, ol {
+    text-align: "center";
+}
+p {
+    color: #F1F2EB;
+}
+a {
+    color: #7E583A;
+}
+a:visited {
+    color: #1E2019;
+}
+a:hover {
+    color: #1E2019;
+}
+a:active {
+    color: #255921;
 }
