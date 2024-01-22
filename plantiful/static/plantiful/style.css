@@ -1,11 +1,12 @@
 h1, h2, h3, h4, h5, h6 {
-    color: green;
+    color: 255921;
     text-align: center;
 }
 body {
     margin:0 auto;
     max-width: max-content;
+    background-color: 62A87C;
 }
 li a {
-    color: green;
+    color: 255921;
 }
