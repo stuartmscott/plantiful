@@ -14,6 +14,10 @@ body {
     padding: 36px;
     text-align: center;
 }
+fieldset {
+    border-radius: 16px;
+    padding: 6px;
+}
 ul, ol {
     text-align: "center";
     list-style-position: inside;

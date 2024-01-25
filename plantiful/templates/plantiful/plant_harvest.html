@@ -1,0 +1,21 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plant {{ plant.id }} Harvest{% endblock %}
+
+{% block content %}
+<h1>Plant {{ plant.id }} Harvest</h2>
+
+<ul>
+{% for produce in plant.species.produce_set.all %}
+    <li>{{ produce.name }}
+        <ul>
+    {%  for harvest in plant.harvest.filter(produce=produce.id) %}
+            <li><a href="{% url 'harvest' harvest.id %}">{{ harvest.datetime }}</a> {{ harvest.weight }} {{ harvest.unit_name }}</li>
+    {%  endfor %}
+        </ul>
+    </li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

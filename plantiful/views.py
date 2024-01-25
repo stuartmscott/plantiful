@@ -25,6 +25,21 @@ def container(request, container_id):
     return render(request, "plantiful/container.html", {"container": container})
 
 
+def container_relocation(request, container_id):
+    container = get_object_or_404(Container, pk=container_id)
+    return render(request, "plantiful/container_relocation.html", {"container": container})
+
+
+def container_resoil(request, container_id):
+    container = get_object_or_404(Container, pk=container_id)
+    return render(request, "plantiful/container_resoil.html", {"container": container})
+
+
+def container_transplant(request, container_id):
+    container = get_object_or_404(Container, pk=container_id)
+    return render(request, "plantiful/container_transplant.html", {"container": container})
+
+
 def new_relocation(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     location=request.POST["location_name"]
@@ -87,6 +102,55 @@ def new_plant(request):
 def plant(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     return render(request, "plantiful/plant.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_harvest(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_harvest.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_fertilize(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_fertilize.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_mulch(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_mulch.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_observation(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_observation.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_prune(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_prune.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_relocation(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    # TODO
+    relocations = []
+    return render(request, "plantiful/plant_relocation.html", {"plant": plant, "relocations": relocations, "units": Unit.choices})
+
+
+def plant_resoil(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    # TODO
+    resoils = []
+    return render(request, "plantiful/plant_resoil.html", {"plant": plant, "resoils": resoils, "units": Unit.choices})
+
+
+def plant_transplant(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_transplant.html", {"plant": plant, "units": Unit.choices})
+
+
+def plant_water(request, plant_id):
+    plant = get_object_or_404(Plant, pk=plant_id)
+    return render(request, "plantiful/plant_water.html", {"plant": plant, "units": Unit.choices})
 
 
 def transplant(request, transplant_id):

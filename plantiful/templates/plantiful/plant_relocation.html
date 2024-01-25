@@ -1,0 +1,14 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plant {{ plant.id }} Relocations{% endblock %}
+
+{% block content %}
+<h1>Plant {{ plant.id }} Relocations</h2>
+
+<ul>
+{% for relocation in relocations %}
+    <li><a href="{% url 'relocation' relocation.id %}">{{ relocation.datetime }} {{ relocation.location }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

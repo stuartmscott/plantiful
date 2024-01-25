@@ -1,0 +1,14 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plant {{ plant.id }} Resoils{% endblock %}
+
+{% block content %}
+<h1>Plant {{ plant.id }} Resoils</h2>
+
+<ul>
+{% for resoil in resoils %}
+    <li><a href="{% url 'resoil' resoil.id %}">{{ resoil.datetime }} {{ resoil.type }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

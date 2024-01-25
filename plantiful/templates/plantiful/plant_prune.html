@@ -1,0 +1,15 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Plant {{ plant.id }} Prune{% endblock %}
+
+{% block content %}
+<h1>Plant {{ plant.id }} Prune</h2>
+
+<ul>
+{% for prune in plant.prune_set.all %}
+    <li><a href="{% url 'prune' prune.id %}">{{ prune.datetime }}</a> {% if prune.text %}{{ prune.text }}{% endif %}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
