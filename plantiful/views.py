@@ -106,7 +106,10 @@ def plant(request, plant_id):
 
 def plant_harvest(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    return render(request, "plantiful/plant_harvest.html", {"plant": plant, "units": Unit.choices})
+    harvests = {}
+    for produce in plant.species.produce_set.all():
+        harvests[produce.name] = plant.harvest_set.filter(produce=produce.id)
+    return render(request, "plantiful/plant_harvest.html", {"plant": plant, "plant_harvests": harvests, "units": Unit.choices})
 
 
 def plant_fertilize(request, plant_id):

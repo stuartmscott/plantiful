@@ -6,10 +6,10 @@
 <h1>Plant {{ plant.id }} Harvest</h2>
 
 <ul>
-{% for produce in plant.species.produce_set.all %}
-    <li>{{ produce.name }}
+{% for produce, harvest in plant_harvests.items %}
+    <li>{{ produce }}: {{ harvests|length }}
+    {%  for harvest in harvests %}
         <ul>
-    {%  for harvest in plant.harvest.filter(produce=produce.id) %}
             <li><a href="{% url 'harvest' harvest.id %}">{{ harvest.datetime }}</a> {{ harvest.weight }} {{ harvest.unit_name }}</li>
     {%  endfor %}
         </ul>

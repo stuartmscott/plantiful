@@ -59,12 +59,31 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Observe</h2></legend>
+    <p><a href="{% url 'plant_observation' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <input type="text" name="observation_text" id="observation_text" />
-    <label for="observation_text">Text</label><br>
-    <input type="image" name="observation_image" id="observation_image" />
-    <label for="observation_image">Image</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="observation_text">Text</label><br>
+            </th>
+            <td width="50%">
+                <input type="text" name="observation_text" id="observation_text" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="observation_image">Image</label><br>
+            </th>
+            <td>
+                <input type="image" name="observation_image" id="observation_image" />
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 
@@ -72,16 +91,35 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Water</h2></legend>
+    <p><a href="{% url 'plant_water' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <input type="integer" name="water_amount" id="water_amount" />
-    <label for="water_amount">Amount</label><br>
-    <select name="water_unit" id="water_unit">
-    {% for unit in units %}
-        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Litre" %}selected{% endif %}>{{ unit.1 }}</option>
-    {% endfor %}
-    </select>
-    <label for="water_unit">Unit</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="water_amount">Amount</label><br>
+            </th>
+            <td>
+                <input type="integer" name="water_amount" id="water_amount" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="water_unit">Unit</label><br>
+            </th>
+            <td>
+                <select name="water_unit" id="water_unit">
+                {% for unit in units %}
+                    <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Litre" %}selected{% endif %}>{{ unit.1 }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 
@@ -89,18 +127,43 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Fertilize</h2></legend>
+    <p><a href="{% url 'plant_fertilize' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <input type="type" name="fertilize_type" id="fertilize_type" />
-    <label for="fertilize_type">Type</label><br>
-    <input type="integer" name="fertilize_amount" id="fertilize_amount" />
-    <label for="fertilize_amount">Amount</label><br>
-    <select name="fertilize_unit" id="fertilize_unit">
-    {% for unit in units %}
-        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Kilogram" %}selected{% endif %}>{{ unit.1 }}</option>
-    {% endfor %}
-    </select>
-    <label for="fertilize_unit">Unit</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="fertilize_type">Type</label><br>
+            </th>
+            <td>
+                <input type="type" name="fertilize_type" id="fertilize_type" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="fertilize_amount">Amount</label><br>
+            </th>
+            <td>
+                <input type="integer" name="fertilize_amount" id="fertilize_amount" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="fertilize_unit">Unit</label><br>
+            </th>
+            <td>
+                <select name="fertilize_unit" id="fertilize_unit">
+                {% for unit in units %}
+                    <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Kilogram" %}selected{% endif %}>{{ unit.1 }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 
@@ -108,10 +171,23 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Mulch</h2></legend>
+    <p><a href="{% url 'plant_mulch' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <input type="type" name="mulch_type" id="mulch_type" />
-    <label for="mulch_type">Type</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="mulch_type">Type</label><br>
+            </th>
+            <td>
+                <input type="type" name="mulch_type" id="mulch_type" />
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 
@@ -119,22 +195,47 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Harvest</h2></legend>
+    <p><a href="{% url 'plant_harvest' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <select name="produce_id" id="produce_id">
-    {% for produce in plant.species.produce_set.all %}
-        <option value="{{ produce.id }}" label="{{ produce.name }}">{{ produce.name }}</option>
-    {% endfor %}
-    </select>
-    <label for="produce_id">Produce</label><br>
-    <input type="integer" name="harvest_weight" id="harvest_weight" />
-    <label for="harvest_weight">Weight</label><br>
-    <select name="harvest_unit" id="harvest_unit">
-    {% for unit in units %}
-        <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Gram" %}selected{% endif %}>{{ unit.1 }}</option>
-    {% endfor %}
-    </select>
-    <label for="harvest_unit">Unit</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="produce_id">Produce</label><br>
+            </th>
+            <td>
+                <select name="produce_id" id="produce_id">
+                {% for produce in plant.species.produce_set.all %}
+                    <option value="{{ produce.id }}" label="{{ produce.name }}">{{ produce.name }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="harvest_weight">Weight</label><br>
+            </th>
+            <td>
+                <input type="integer" name="harvest_weight" id="harvest_weight" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="harvest_unit">Unit</label><br>
+            </th>
+            <td>
+                <select name="harvest_unit" id="harvest_unit">
+                {% for unit in units %}
+                    <option value="{{ unit.0 }}" label="{{ unit.1 }}" {% if unit.1 == "Gram" %}selected{% endif %}>{{ unit.1 }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 
@@ -142,10 +243,23 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Prune</h2></legend>
+    <p><a href="{% url 'plant_prune' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <input type="text" name="prune_text" id="prune_text" />
-    <label for="prune_text">Text</label><br>
-    <input type="submit" value="Record">
+    <table width="100%">
+        <tr>
+            <th width="50%">
+                <label for="prune_text">Text</label><br>
+            </th>
+            <td>
+                <input type="text" name="prune_text" id="prune_text" />
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="Record">
+            </th>
+        </tr>
+    </table>
 </fieldset>
 </form>
 {% endblock %}
