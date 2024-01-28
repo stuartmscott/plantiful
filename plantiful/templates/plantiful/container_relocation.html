@@ -1,0 +1,14 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Container {{ container.id }} Relocations{% endblock %}
+
+{% block content %}
+<h1>Container {{ container.id }} Relocations</h2>
+
+<ul>
+{% for relocation in container.relocation_set.all %}
+    <li><a href="{% url 'relocation' relocation.id %}">{{ relocation.datetime }} {{ relocation.location }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

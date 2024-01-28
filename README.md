@@ -6,6 +6,15 @@
 
 ## Watering, Fertilizing, Mulching, Pruning
 
+## Color Scheme
+```
+#1E2019 (Eerie Black)
+#F1F2EB (Alabastor White)
+#255921 (Hunter Green)
+#62A87C (Mint Green)
+#7E583A (Coyote Brown)
+```
+
 ## Install
 
 ```sh

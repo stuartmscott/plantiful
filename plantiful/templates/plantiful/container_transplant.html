@@ -1,0 +1,14 @@
+{% extends "plantiful/base.html" %}
+
+{% block title %}Container {{ container.id }} Transplants{% endblock %}
+
+{% block content %}
+<h1>Container {{ container.id }} Transplants</h2>
+
+<ul>
+{% for transplant in container.transplant_set.all %}
+    <li><a href="{% url 'transplant' transplant.id %}">{{ transplant.datetime }} {{ transplant.plant.name }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

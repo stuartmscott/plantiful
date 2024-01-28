@@ -12,4 +12,16 @@
 <h2>Latin Binomial</h2>
 
 <p>{{ species.latin_binomial }}</p>
+
+{% if species.produce_set.exists %}
+<h2>Produce</h2>
+
+<ul>
+{% for produce in species.produce_set.all %}
+    <li><a href="{% url 'produce' produce.id %}">{{ produce.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No produce is available.</p>
+{% endif %}
 {% endblock %}
