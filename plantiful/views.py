@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
@@ -16,6 +17,7 @@ def all_containers(request):
     return render(request, "plantiful/all_containers.html", context)
 
 
+@login_required
 def new_container(request):
     return HttpResponse("NOT YET IMPLEMENTED")
 
@@ -40,6 +42,7 @@ def container_transplant(request, container_id):
     return render(request, "plantiful/container_transplant.html", {"container": container})
 
 
+@login_required
 def new_relocation(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     location=request.POST["location_name"]
@@ -57,6 +60,7 @@ def relocation(request, relocation_id):
     return render(request, "plantiful/relocation.html", {"relocation": relocation})
 
 
+@login_required
 def new_resoil(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
     soil_type=request.POST["resoil_type"]
@@ -80,6 +84,7 @@ def all_species(request):
     return render(request, "plantiful/all_species.html", context)
 
 
+@login_required
 def new_species(request):
     return HttpResponse("NOT YET IMPLEMENTED")
 
@@ -95,6 +100,7 @@ def all_plants(request):
     return render(request, "plantiful/all_plants.html", context)
 
 
+@login_required
 def new_plant(request):
     return HttpResponse("NOT YET IMPLEMENTED")
 
@@ -167,6 +173,7 @@ def all_produce(request):
     return render(request, "plantiful/all_produce.html", context)
 
 
+@login_required
 def new_produce(request):
     return HttpResponse("NOT YET IMPLEMENTED")
 
@@ -176,6 +183,7 @@ def produce(request, produce_id):
     return render(request, "plantiful/produce.html", {"produce": produce})
 
 
+@login_required
 def new_harvest(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     produce = get_object_or_404(Produce, pk=request.POST["produce_id"])
@@ -193,6 +201,7 @@ def harvest(request, harvest_id):
     return render(request, "plantiful/harvest.html", {"harvest": harvest})
 
 
+@login_required
 def new_observation(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     observation = Observation(datetime=timezone.now(),
@@ -208,6 +217,7 @@ def observation(request, observation_id):
     return render(request, "plantiful/observation.html", {"observation": observation})
 
 
+@login_required
 def new_water(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     water = Water(datetime=timezone.now(),
@@ -223,6 +233,7 @@ def water(request, water_id):
     return render(request, "plantiful/water.html", {"water": water})
 
 
+@login_required
 def new_prune(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     prune = Prune(datetime=timezone.now(),
@@ -237,6 +248,7 @@ def prune(request, prune_id):
     return render(request, "plantiful/prune.html", {"prune": prune})
 
 
+@login_required
 def new_fertilize(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     fertilize = Fertilize(datetime=timezone.now(),
@@ -253,6 +265,7 @@ def fertilize(request, fertilize_id):
     return render(request, "plantiful/fertilize.html", {"fertilize": fertilize})
 
 
+@login_required
 def new_mulch(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     mulch = Mulch(datetime=timezone.now(),
@@ -267,6 +280,7 @@ def mulch(request, mulch_id):
     return render(request, "plantiful/mulch.html", {"mulch": mulch})
 
 
+@login_required
 def new_transplant(request, plant_id, container_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     container = get_object_or_404(Container, pk=container_id)
@@ -284,6 +298,7 @@ def transplant(request, transplant_id):
     return render(request, "plantiful/transplant.html", {"transplant": transplant})
 
 
+@login_required
 def new_death(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     death = Death(datetime=timezone.now(),
