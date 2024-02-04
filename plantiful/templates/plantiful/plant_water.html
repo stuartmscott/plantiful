@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Water</h2>
 
 <ul>
-{% for water in plant.water_set.all %}
+    {% for water in plant.water_set.all %}
     <li><a href="{% url 'water' water.id %}">{{ water.datetime }}</a> {{ water.amount }} {{ water.unit_name }}</li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

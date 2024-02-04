@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Transplants</h2>
 
 <ul>
-{% for transplant in plant.transplant_set.all %}
+    {% for transplant in plant.transplant_set.all %}
     <li><a href="{% url 'transplant' transplant.id %}">{{ transplant.datetime }} {{ transplant.container.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

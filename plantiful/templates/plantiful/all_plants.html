@@ -7,9 +7,9 @@
 
 {% if plant_list %}
 <ul>
-{% for plant in plant_list %}
+    {% for plant in plant_list %}
     <li><a href="{% url 'plant' plant.id %}">{{ plant.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
 <p>No plants are available.</p>

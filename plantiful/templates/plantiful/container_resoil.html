@@ -6,9 +6,9 @@
 <h1>Container {{ container.id }} Resoils</h2>
 
 <ul>
-{% for resoil in container.resoil_set.all %}
+    {% for resoil in container.resoil_set.all %}
     <li><a href="{% url 'resoil' resoil.id %}">{{ resoil.datetime }} {{ resoil.type }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

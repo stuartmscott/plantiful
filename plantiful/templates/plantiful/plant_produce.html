@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Produce</h2>
 
 <ul>
-{% for produce in plant.species.produce_set.all %}
+    {% for produce in plant.species.produce_set.all %}
     <li><a href="{% url 'produce' produce.id %}">{{ produce.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

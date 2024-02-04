@@ -7,9 +7,9 @@
 
 {% if species_list %}
 <ul>
-{% for species in species_list %}
+    {% for species in species_list %}
     <li><a href="{% url 'species' species.id %}">{{ species.common_name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
 <p>No species are available.</p>

@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Relocations</h2>
 
 <ul>
-{% for relocation in relocations %}
+    {% for relocation in relocations %}
     <li><a href="{% url 'relocation' relocation.id %}">{{ relocation.datetime }} {{ relocation.location }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

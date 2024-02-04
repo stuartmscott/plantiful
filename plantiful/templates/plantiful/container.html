@@ -16,9 +16,9 @@
 <h2>Plants</h2>
 
 <ul>
-{% for plant in container.plant_set.all %}
+    {% for plant in container.plant_set.all %}
     <li><a href="{% url 'plant' plant.id %}">{{ plant.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 <a href="{% url 'container_transplant' container.id %}">history</a></li>

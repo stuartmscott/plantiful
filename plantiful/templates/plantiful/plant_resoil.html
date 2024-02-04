@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Resoils</h2>
 
 <ul>
-{% for resoil in resoils %}
+    {% for resoil in resoils %}
     <li><a href="{% url 'resoil' resoil.id %}">{{ resoil.datetime }} {{ resoil.type }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

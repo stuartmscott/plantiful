@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Mulchings</h2>
 
 <ul>
-{% for mulch in plant.mulch_set.all %}
+    {% for mulch in plant.mulch_set.all %}
     <li><a href="{% url 'mulch' mulch.id %}">{{ mulch.datetime }} {{ mulch.type }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

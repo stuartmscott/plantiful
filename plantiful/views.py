@@ -24,14 +24,12 @@ from .models import (
 
 
 def index(request):
-    context = {}
-    return render(request, "plantiful/index.html", context)
+    return render(request, "plantiful/index.html", {})
 
 
 def all_containers(request):
     container_list = Container.objects.all()
-    context = {"container_list": container_list}
-    return render(request, "plantiful/all_containers.html", context)
+    return render(request, "plantiful/all_containers.html", {"container_list": container_list})
 
 
 @login_required
@@ -41,7 +39,11 @@ def new_container(request):
 
 def container(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
-    return render(request, "plantiful/container.html", {"container": container})
+    return render(
+        request,
+        "plantiful/container.html",
+        {"container": container, "authenticated": request.user.is_authenticated},
+    )
 
 
 def container_relocation(request, container_id):
@@ -93,8 +95,11 @@ def resoil(request, resoil_id):
 
 def all_species(request):
     species_list = Species.objects.all()
-    context = {"species_list": species_list}
-    return render(request, "plantiful/all_species.html", context)
+    return render(
+        request,
+        "plantiful/all_species.html",
+        {"species_list": species_list, "authenticated": request.user.is_authenticated},
+    )
 
 
 @login_required
@@ -109,8 +114,11 @@ def species(request, species_id):
 
 def all_plants(request):
     plant_list = Plant.objects.order_by("-datetime")
-    context = {"plant_list": plant_list}
-    return render(request, "plantiful/all_plants.html", context)
+    return render(
+        request,
+        "plantiful/all_plants.html",
+        {"plant_list": plant_list, "authenticated": request.user.is_authenticated},
+    )
 
 
 @login_required
@@ -138,6 +146,7 @@ def plant(request, plant_id):
             "latest_harvest_list": latest_harvest_list,
             "latest_prune_list": latest_prune_list,
             "units": Unit.choices,
+            "authenticated": request.user.is_authenticated,
         },
     )
 
@@ -145,8 +154,10 @@ def plant(request, plant_id):
 def plant_harvest(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     harvests = {}
-    for produce in plant.species.produce_set.all():
-        harvests[produce.name] = plant.harvest_set.filter(produce=produce.id)
+    for harvest in plant.harvest_set.all():
+        if not harvest.produce.name in harvests:
+            harvests[harvest.produce.name] = []
+        harvests[harvest.produce.name].append(harvest)
     return render(
         request,
         "plantiful/plant_harvest.html",
@@ -225,8 +236,11 @@ def transplant(request, transplant_id):
 
 def all_produce(request):
     produce_list = Produce.objects.all()
-    context = {"produce_list": produce_list}
-    return render(request, "plantiful/all_produce.html", context)
+    return render(
+        request,
+        "plantiful/all_produce.html",
+        {"produce_list": produce_list, "authenticated": request.user.is_authenticated},
+    )
 
 
 @login_required
@@ -248,7 +262,9 @@ def new_harvest(request, plant_id):
         plant=plant,
         produce=produce,
         weight=(
-            request.POST["harvest_weight"] if "harvest_weight" in request.POST and request.POST["harvest_weight"] else 1
+            request.POST["harvest_weight"]
+            if "harvest_weight" in request.POST and request.POST["harvest_weight"]
+            else 1
         ),
         unit=request.POST["harvest_unit"] if "harvest_unit" in request.POST else None,
     )
@@ -264,7 +280,9 @@ def harvest(request, harvest_id):
 @login_required
 def new_observation(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    observation = Observation(datetime=timezone.now(), plant=plant, text=request.POST["observation_text"])
+    observation = Observation(
+        datetime=timezone.now(), plant=plant, text=request.POST["observation_text"]
+    )
     # image=request.POST["observation_image"])
     observation.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
@@ -282,7 +300,9 @@ def new_water(request, plant_id):
         datetime=timezone.now(),
         plant=plant,
         amount=(
-            int(request.POST["water_amount"]) if "water_amount" and request.POST["water_amount"] in request.POST else 1
+            int(request.POST["water_amount"])
+            if "water_amount" and request.POST["water_amount"] in request.POST
+            else 1
         ),
         unit=(request.POST["water_unit"] if "water_unit" in request.POST else Unit.LITRE[0]),
     )

@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Observations</h2>
 
 <ul>
-{% for observation in plant.observation_set.all %}
+    {% for observation in plant.observation_set.all %}
     <li><a href="{% url 'observation' observation.id %}">{{ observation.datetime }}</a> {{ observation.text }} {{ observation.image }}</li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

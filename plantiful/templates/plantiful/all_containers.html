@@ -7,9 +7,9 @@
 
 {% if container_list %}
 <ul>
-{% for container in container_list %}
+    {% for container in container_list %}
     <li><a href="{% url 'container' container.id %}">{{ container.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
 <p>No containers are available.</p>

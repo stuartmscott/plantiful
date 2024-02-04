@@ -6,9 +6,9 @@
 <h1>Plant {{ plant.id }} Fertilizings</h2>
 
 <ul>
-{% for fertilize in plant.fertilize_set.all %}
+    {% for fertilize in plant.fertilize_set.all %}
     <li><a href="{% url 'fertilize' fertilize.id %}">{{ fertilize.datetime }}</a> {{ fertilize.type }} {{ fertilize.amount }} {{ fertilize.unit_name }}</li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}

@@ -7,9 +7,9 @@
 
 {% if produce_list %}
 <ul>
-{% for produce in produce_list %}
+    {% for produce in produce_list %}
     <li><a href="{% url 'produce' produce.id %}">{{ produce.name }}</a></li>
-{% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
 <p>No produce is available.</p>
