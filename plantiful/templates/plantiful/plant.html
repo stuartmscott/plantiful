@@ -61,18 +61,18 @@
     <legend><h2>Observe</h2></legend>
     <p><a href="{% url 'plant_observation' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="observation_text">Text</label><br>
+            <th class="formtableheader">
+                <label for="observation_text">Text</label>
             </th>
-            <td width="50%">
+            <td>
                 <input type="text" name="observation_text" id="observation_text" />
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="observation_image">Image</label><br>
+            <th class="formtableheader">
+                <label for="observation_image">Image</label>
             </th>
             <td>
                 <input type="image" name="observation_image" id="observation_image" />
@@ -93,18 +93,18 @@
     <legend><h2>Water</h2></legend>
     <p><a href="{% url 'plant_water' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="water_amount">Amount</label><br>
+            <th class="formtableheader">
+                <label for="water_amount">Amount</label>
             </th>
             <td>
                 <input type="integer" name="water_amount" id="water_amount" />
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="water_unit">Unit</label><br>
+            <th class="formtableheader">
+                <label for="water_unit">Unit</label>
             </th>
             <td>
                 <select name="water_unit" id="water_unit">
@@ -129,26 +129,26 @@
     <legend><h2>Fertilize</h2></legend>
     <p><a href="{% url 'plant_fertilize' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="fertilize_type">Type</label><br>
+            <th class="formtableheader">
+                <label for="fertilize_type">Type</label>
             </th>
             <td>
-                <input type="type" name="fertilize_type" id="fertilize_type" />
+                <input type="text" name="fertilize_type" id="fertilize_type" />
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="fertilize_amount">Amount</label><br>
+            <th class="formtableheader">
+                <label for="fertilize_amount">Amount</label>
             </th>
             <td>
                 <input type="integer" name="fertilize_amount" id="fertilize_amount" />
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="fertilize_unit">Unit</label><br>
+            <th class="formtableheader">
+                <label for="fertilize_unit">Unit</label>
             </th>
             <td>
                 <select name="fertilize_unit" id="fertilize_unit">
@@ -173,13 +173,13 @@
     <legend><h2>Mulch</h2></legend>
     <p><a href="{% url 'plant_mulch' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="mulch_type">Type</label><br>
+            <th class="formtableheader">
+                <label for="mulch_type">Type</label>
             </th>
             <td>
-                <input type="type" name="mulch_type" id="mulch_type" />
+                <input type="text" name="mulch_type" id="mulch_type" />
             </td>
         </tr>
         <tr>
@@ -197,10 +197,10 @@
     <legend><h2>Harvest</h2></legend>
     <p><a href="{% url 'plant_harvest' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="produce_id">Produce</label><br>
+            <th class="formtableheader">
+                <label for="produce_id">Produce</label>
             </th>
             <td>
                 <select name="produce_id" id="produce_id">
@@ -211,16 +211,16 @@
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="harvest_weight">Weight</label><br>
+            <th class="formtableheader">
+                <label for="harvest_weight">Weight</label>
             </th>
             <td>
                 <input type="integer" name="harvest_weight" id="harvest_weight" />
             </td>
         </tr>
         <tr>
-            <th>
-                <label for="harvest_unit">Unit</label><br>
+            <th class="formtableheader">
+                <label for="harvest_unit">Unit</label>
             </th>
             <td>
                 <select name="harvest_unit" id="harvest_unit">
@@ -245,10 +245,10 @@
     <legend><h2>Prune</h2></legend>
     <p><a href="{% url 'plant_prune' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table width="100%">
+    <table class="formtable">
         <tr>
-            <th width="50%">
-                <label for="prune_text">Text</label><br>
+            <th class="formtableheader">
+                <label for="prune_text">Text</label>
             </th>
             <td>
                 <input type="text" name="prune_text" id="prune_text" />

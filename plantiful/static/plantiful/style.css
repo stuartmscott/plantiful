@@ -1,6 +1,7 @@
-h1, h2, h3, h4, h5, h6 {
-    color: #255921;
+h1, h2, h3, h4, h5, h6, th {
     text-align: center;
+    text-shadow: 1px 1px 4px #1E2019 /* (Eerie Black) */;
+    color: #62A87C /* (Mint Green) */;
 }
 body {
     background-color: #1E2019;
@@ -9,30 +10,41 @@ body {
     min-width: 500px;
 }
 #content {
-    background-color: #62A87C;
+    background-color: #255921;
     border-radius: 36px;
     padding: 36px;
     text-align: center;
 }
 fieldset {
+    border: 1px #62A87C /* (Mint Green) */ solid;
     border-radius: 16px;
     padding: 6px;
 }
+.formtable {
+    width: 100%;
+}
+.formtableheader {
+    text-align: center;
+    width: 50%;
+}
+input[type="integer"], input[type="text"], textarea {
+    background-color: #62A87C /* (Mint Green) */;
+}
 ul, ol {
-    text-align: "center";
+    text-align: center;
     list-style-position: inside;
 }
 p {
     color: #F1F2EB;
 }
 a {
-    color: #7E583A;
+    color: #1E2019;
 }
 a:visited {
-    color: #1E2019;
+    color: #F1F2EB;
 }
 a:hover {
-    color: #1E2019;
+    color: #62A87C;
 }
 a:active {
     color: #255921;
