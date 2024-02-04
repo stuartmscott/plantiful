@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 class Unit(models.IntegerChoices):
     UNITLESS = 0, _("Unitless")
     GRAM = 1, _("Gram")
@@ -49,7 +50,7 @@ class Plant(models.Model):
         choices=Source.choices,
         default=Source.UNKNOWN,
     )
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True)
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
     container = models.ForeignKey(Container, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -72,7 +73,7 @@ class Produce(models.Model):
 class Harvest(models.Model):
     datetime = models.DateTimeField("date of harvesting")
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
-    produce  = models.ForeignKey(Produce, on_delete=models.CASCADE)
+    produce = models.ForeignKey(Produce, on_delete=models.CASCADE)
     weight = models.IntegerField(default=0)
     unit = models.IntegerField(
         choices=Unit.choices,

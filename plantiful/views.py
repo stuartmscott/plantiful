@@ -4,7 +4,24 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import Container, Relocation, Resoil, Species, Plant, Transplant, Produce, Harvest, Observation, Water, Prune, Fertilize, Mulch, Death, Unit
+from .models import (
+    Container,
+    Relocation,
+    Resoil,
+    Species,
+    Plant,
+    Transplant,
+    Produce,
+    Harvest,
+    Observation,
+    Water,
+    Prune,
+    Fertilize,
+    Mulch,
+    Death,
+    Unit,
+)
+
 
 def index(request):
     context = {}
@@ -45,10 +62,8 @@ def container_transplant(request, container_id):
 @login_required
 def new_relocation(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
-    location=request.POST["location_name"]
-    relocation = Relocation(datetime=timezone.now(),
-        container=container,
-        name=location)
+    location = request.POST["location_name"]
+    relocation = Relocation(datetime=timezone.now(), container=container, name=location)
     relocation.save()
     container.location = location
     container.save()
@@ -63,10 +78,8 @@ def relocation(request, relocation_id):
 @login_required
 def new_resoil(request, container_id):
     container = get_object_or_404(Container, pk=container_id)
-    soil_type=request.POST["resoil_type"]
-    resoil = Resoil(datetime=timezone.now(),
-        container=container,
-        type=soil_type)
+    soil_type = request.POST["resoil_type"]
+    resoil = Resoil(datetime=timezone.now(), container=container, type=soil_type)
     resoil.save()
     container.soil_type = soil_type
     container.save()
@@ -113,7 +126,20 @@ def plant(request, plant_id):
     latest_mulch_list = plant.mulch_set.order_by("-datetime")[:5]
     latest_harvest_list = plant.harvest_set.order_by("-datetime")[:5]
     latest_prune_list = plant.prune_set.order_by("-datetime")[:5]
-    return render(request, "plantiful/plant.html", {"plant": plant, "latest_observation_list": latest_observation_list, "latest_water_list": latest_water_list, "latest_fertilize_list": latest_fertilize_list, "latest_mulch_list": latest_mulch_list, "latest_harvest_list": latest_harvest_list, "latest_prune_list": latest_prune_list, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant.html",
+        {
+            "plant": plant,
+            "latest_observation_list": latest_observation_list,
+            "latest_water_list": latest_water_list,
+            "latest_fertilize_list": latest_fertilize_list,
+            "latest_mulch_list": latest_mulch_list,
+            "latest_harvest_list": latest_harvest_list,
+            "latest_prune_list": latest_prune_list,
+            "units": Unit.choices,
+        },
+    )
 
 
 def plant_harvest(request, plant_id):
@@ -121,12 +147,20 @@ def plant_harvest(request, plant_id):
     harvests = {}
     for produce in plant.species.produce_set.all():
         harvests[produce.name] = plant.harvest_set.filter(produce=produce.id)
-    return render(request, "plantiful/plant_harvest.html", {"plant": plant, "plant_harvests": harvests, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_harvest.html",
+        {"plant": plant, "plant_harvests": harvests, "units": Unit.choices},
+    )
 
 
 def plant_fertilize(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    return render(request, "plantiful/plant_fertilize.html", {"plant": plant, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_fertilize.html",
+        {"plant": plant, "units": Unit.choices},
+    )
 
 
 def plant_mulch(request, plant_id):
@@ -136,7 +170,11 @@ def plant_mulch(request, plant_id):
 
 def plant_observation(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    return render(request, "plantiful/plant_observation.html", {"plant": plant, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_observation.html",
+        {"plant": plant, "units": Unit.choices},
+    )
 
 
 def plant_prune(request, plant_id):
@@ -148,19 +186,31 @@ def plant_relocation(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     # TODO
     relocations = []
-    return render(request, "plantiful/plant_relocation.html", {"plant": plant, "relocations": relocations, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_relocation.html",
+        {"plant": plant, "relocations": relocations, "units": Unit.choices},
+    )
 
 
 def plant_resoil(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     # TODO
     resoils = []
-    return render(request, "plantiful/plant_resoil.html", {"plant": plant, "resoils": resoils, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_resoil.html",
+        {"plant": plant, "resoils": resoils, "units": Unit.choices},
+    )
 
 
 def plant_transplant(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    return render(request, "plantiful/plant_transplant.html", {"plant": plant, "units": Unit.choices})
+    return render(
+        request,
+        "plantiful/plant_transplant.html",
+        {"plant": plant, "units": Unit.choices},
+    )
 
 
 def plant_water(request, plant_id):
@@ -193,11 +243,15 @@ def produce(request, produce_id):
 def new_harvest(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     produce = get_object_or_404(Produce, pk=request.POST["produce_id"])
-    harvest = Harvest(datetime=timezone.now(),
+    harvest = Harvest(
+        datetime=timezone.now(),
         plant=plant,
         produce=produce,
-        weight=request.POST["harvest_weight"] if "harvest_weight" in request.POST and request.POST["harvest_weight"] else 1,
-        unit=request.POST["harvest_unit"] if "harvest_unit" in request.POST else None)
+        weight=(
+            request.POST["harvest_weight"] if "harvest_weight" in request.POST and request.POST["harvest_weight"] else 1
+        ),
+        unit=request.POST["harvest_unit"] if "harvest_unit" in request.POST else None,
+    )
     harvest.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -210,10 +264,8 @@ def harvest(request, harvest_id):
 @login_required
 def new_observation(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    observation = Observation(datetime=timezone.now(),
-        plant=plant,
-        text=request.POST["observation_text"])
-        #image=request.POST["observation_image"])
+    observation = Observation(datetime=timezone.now(), plant=plant, text=request.POST["observation_text"])
+    # image=request.POST["observation_image"])
     observation.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -226,10 +278,14 @@ def observation(request, observation_id):
 @login_required
 def new_water(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    water = Water(datetime=timezone.now(),
+    water = Water(
+        datetime=timezone.now(),
         plant=plant,
-        amount=int(request.POST["water_amount"]) if "water_amount" and request.POST["water_amount"] in request.POST else 1,
-        unit=request.POST["water_unit"] if "water_unit" in request.POST else Unit.LITRE[0])
+        amount=(
+            int(request.POST["water_amount"]) if "water_amount" and request.POST["water_amount"] in request.POST else 1
+        ),
+        unit=(request.POST["water_unit"] if "water_unit" in request.POST else Unit.LITRE[0]),
+    )
     water.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -242,9 +298,11 @@ def water(request, water_id):
 @login_required
 def new_prune(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    prune = Prune(datetime=timezone.now(),
+    prune = Prune(
+        datetime=timezone.now(),
         plant=plant,
-        text=request.POST["prune_text"] if "prune_text" in request.POST else None)
+        text=request.POST["prune_text"] if "prune_text" in request.POST else None,
+    )
     prune.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -257,11 +315,17 @@ def prune(request, prune_id):
 @login_required
 def new_fertilize(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    fertilize = Fertilize(datetime=timezone.now(),
+    fertilize = Fertilize(
+        datetime=timezone.now(),
         plant=plant,
         type=request.POST["fertilize_type"],
-        amount=int(request.POST["fertilize_amount"]) if "fertilize_amount" and request.POST["fertilize_amount"] in request.POST else 1,
-        unit=request.POST["fertilize_unit"] if "fertilize_unit" in request.POST else None)
+        amount=(
+            int(request.POST["fertilize_amount"])
+            if "fertilize_amount" and request.POST["fertilize_amount"] in request.POST
+            else 1
+        ),
+        unit=(request.POST["fertilize_unit"] if "fertilize_unit" in request.POST else None),
+    )
     fertilize.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -274,9 +338,7 @@ def fertilize(request, fertilize_id):
 @login_required
 def new_mulch(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    mulch = Mulch(datetime=timezone.now(),
-        plant=plant,
-        type=request.POST["mulch_type"])
+    mulch = Mulch(datetime=timezone.now(), plant=plant, type=request.POST["mulch_type"])
     mulch.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
@@ -290,9 +352,7 @@ def mulch(request, mulch_id):
 def new_transplant(request, plant_id, container_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     container = get_object_or_404(Container, pk=container_id)
-    transplant = Transplant(datetime=timezone.now(),
-        plant=plant,
-        container=container)
+    transplant = Transplant(datetime=timezone.now(), plant=plant, container=container)
     transplant.save()
     plant.container = container_id
     plant.save()
@@ -307,8 +367,7 @@ def transplant(request, transplant_id):
 @login_required
 def new_death(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    death = Death(datetime=timezone.now(),
-        plant=plant)
+    death = Death(datetime=timezone.now(), plant=plant)
     death.save()
     return HttpResponseRedirect(reverse("plant", args=(plant_id,)))
 
