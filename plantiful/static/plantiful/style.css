@@ -32,7 +32,13 @@ input[type="integer"], input[type="text"], textarea {
 }
 ul, ol {
     text-align: center;
-    list-style-position: inside;
+    list-style: none;
+    padding: 8px;
+    margin: 8px;
+}
+li {
+    padding: 2px;
+    margin: 2px;
 }
 p {
     color: #F1F2EB;

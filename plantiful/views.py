@@ -107,7 +107,13 @@ def new_plant(request):
 
 def plant(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
-    return render(request, "plantiful/plant.html", {"plant": plant, "units": Unit.choices})
+    latest_observation_list = plant.observation_set.order_by("-datetime")[:5]
+    latest_water_list = plant.water_set.order_by("-datetime")[:5]
+    latest_fertilize_list = plant.fertilize_set.order_by("-datetime")[:5]
+    latest_mulch_list = plant.mulch_set.order_by("-datetime")[:5]
+    latest_harvest_list = plant.harvest_set.order_by("-datetime")[:5]
+    latest_prune_list = plant.prune_set.order_by("-datetime")[:5]
+    return render(request, "plantiful/plant.html", {"plant": plant, "latest_observation_list": latest_observation_list, "latest_water_list": latest_water_list, "latest_fertilize_list": latest_fertilize_list, "latest_mulch_list": latest_mulch_list, "latest_harvest_list": latest_harvest_list, "latest_prune_list": latest_prune_list, "units": Unit.choices})
 
 
 def plant_harvest(request, plant_id):

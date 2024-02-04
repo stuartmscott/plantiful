@@ -59,7 +59,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Observe</h2></legend>
-    <p><a href="{% url 'plant_observation' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -84,6 +83,14 @@
             </th>
         </tr>
     </table>
+{% if latest_observation_list %}
+    <ul>
+    {% for observation in latest_observation_list %}
+        <li><a href="{% url 'observation' observation.id %}">{{ observation.datetime }} {{ observation.text }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_observation' plant.id %}">history</a></p>
 </fieldset>
 </form>
 
@@ -91,7 +98,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Water</h2></legend>
-    <p><a href="{% url 'plant_water' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -120,6 +126,14 @@
             </th>
         </tr>
     </table>
+{% if latest_water_list %}
+    <ul>
+    {% for water in latest_water_list %}
+        <li><a href="{% url 'water' water.id %}">{{ water.datetime }} {{ water.amount }} {{ water.unit_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_water' plant.id %}">history</a></p>
 </fieldset>
 </form>
 
@@ -127,7 +141,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Fertilize</h2></legend>
-    <p><a href="{% url 'plant_fertilize' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -164,6 +177,14 @@
             </th>
         </tr>
     </table>
+{% if latest_fertilize_list %}
+    <ul>
+    {% for fertilize in latest_fertilize_list %}
+        <li><a href="{% url 'fertilize' fertilize.id %}">{{ fertilize.datetime }} {{ fertilize.type }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_fertilize' plant.id %}">history</a></p>
 </fieldset>
 </form>
 
@@ -171,7 +192,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Mulch</h2></legend>
-    <p><a href="{% url 'plant_mulch' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -188,6 +208,14 @@
             </th>
         </tr>
     </table>
+{% if latest_mulch_list %}
+    <ul>
+    {% for mulch in latest_mulch_list %}
+        <li><a href="{% url 'mulch' mulch.id %}">{{ mulch.datetime }} {{ mulch.type }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_mulch' plant.id %}">history</a></p>
 </fieldset>
 </form>
 
@@ -195,7 +223,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Harvest</h2></legend>
-    <p><a href="{% url 'plant_harvest' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -236,6 +263,14 @@
             </th>
         </tr>
     </table>
+{% if latest_harvest_list %}
+    <ul>
+    {% for harvest in latest_harvest_list %}
+        <li><a href="{% url 'harvest' harvest.id %}">{{ harvest.datetime }} {{ harvest.produce.name }} {{ harvest.weight }} {{harvest.unit_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_harvest' plant.id %}">history</a></p>
 </fieldset>
 </form>
 
@@ -243,7 +278,6 @@
 {% csrf_token %}
 <fieldset>
     <legend><h2>Prune</h2></legend>
-    <p><a href="{% url 'plant_prune' plant.id %}">history</a></p>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <table class="formtable">
         <tr>
@@ -260,6 +294,14 @@
             </th>
         </tr>
     </table>
+{% if latest_prune_list %}
+    <ul>
+    {% for prune in latest_prune_list %}
+        <li><a href="{% url 'prune' prune.id %}">{{ prune.datetime }} {{prune.text }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <p><a href="{% url 'plant_prune' plant.id %}">history</a></p>
 </fieldset>
 </form>
 {% endblock %}
